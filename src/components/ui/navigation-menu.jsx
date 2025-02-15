@@ -48,7 +48,6 @@ const NavigationMenuTrigger = React.forwardRef(({ className, children, ...props 
 ));
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
 
-// Ensure this is declared only once
 const NavigationMenuContent = React.forwardRef(({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.Content
     ref={ref}

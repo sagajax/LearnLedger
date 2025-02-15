@@ -22,16 +22,14 @@ function App() {
       <Navbar />
       
       
-      <div className="mb-40">
+      <div className="mb-50">
       <HeroSection />
       </div>
       {/* <Phone /> */}
       <Slider />
       <FeatureGrid />
       <Banner />
-      <div className="mb-40">
-        <Pg />
-      </div>
+      <Pg />
       <BentoGrid />
       <BlackWarpBackground />
       <FAQSection />
