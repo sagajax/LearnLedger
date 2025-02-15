@@ -4,7 +4,7 @@ import crypto2 from '../assets/crypto2.webp';
 
 const CryptoBanner = () => {
   return (
-    <div className="px-8 w-full"> {/* Add padding to the left and right */}
+    <div className="px-28 w-full"> {/* Add padding to the left and right */}
       <div className="flex gap-4 w-full">
         {/* Left Banner */}
         <div 
