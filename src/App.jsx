@@ -35,7 +35,7 @@ function App() {
       <BentoGrid />
       <BlackWarpBackground />
       <FAQSection />
-      <PartnersSection />
+      {/* <PartnersSection /> */}
       <div className="mb-20 "> 
       <SetupOneKey />
       </div>
