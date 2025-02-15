@@ -23,7 +23,7 @@ function App() {
       <div className='flex flex-col items-center py-8 '>
       <Navbar />
       <HeroSection />
-      <Phone />
+      {/* <Phone /> */}
       <Slider />
       <FeatureGrid />
       <Banner />
