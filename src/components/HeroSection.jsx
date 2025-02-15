@@ -1,67 +1,100 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from "react";
+const cn = (...classes) => classes.filter(Boolean).join(" ");
+
+const AuroraBackground = ({
+  className,
+  children,
+  showRadialGradient = true,
+  ...props
+}) => {
+  return (
+    <main className="w-screen min-h-screen bg-zinc-50 dark:bg-zinc-900 overflow-hidden">
+      <div
+        className={cn(
+          "relative flex flex-col min-h-[100vh] w-screen items-center justify-center transition-bg",
+          className
+        )}
+        style={{
+          "--white": "rgba(255, 255, 255, 0.85)",
+          "--black": "rgba(0, 0, 0, 0.85)",
+          "--transparent": "transparent",
+          "--blue-300": "rgb(147, 197, 253)",
+          "--blue-400": "rgb(96, 165, 250)",
+          "--blue-500": "rgb(59, 130, 246)",
+          "--indigo-300": "rgb(165, 180, 252)",
+          "--violet-200": "rgb(221, 214, 254)",
+        }}
+        {...props}>
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className={cn(`
+              [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]
+              [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)]
+              [--aurora:repeating-linear-gradient(100deg,var(--blue-500)_10%,var(--indigo-300)_15%,var(--blue-300)_20%,var(--violet-200)_25%,var(--blue-400)_30%)]
+              [background-image:var(--white-gradient),var(--aurora)]
+              dark:[background-image:var(--dark-gradient),var(--aurora)]
+              [background-size:300%,_200%]
+              [background-position:50%_50%,50%_50%]
+              filter blur-[8px] invert dark:invert-0
+              after:content-[""] after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] 
+              after:dark:[background-image:var(--dark-gradient),var(--aurora)]
+              after:[background-size:200%,_100%] 
+              after:[animation:aurora_8s_linear_infinite] 
+              after:[background-attachment:fixed] 
+              after:mix-blend-difference
+              pointer-events-none
+              absolute -inset-[10px] opacity-70 
+              animate-aurora
+              will-change-transform`,
+              showRadialGradient &&
+              `[mask-image:radial-gradient(ellipse_at_100%_0%,black_20%,var(--transparent)_80%)]`
+            )}
+          />
+        </div>
+        {children}
+      </div>
+    </main>
+  );
+};
 
 const HeroSection = () => {
-  // const [hoveredButton, setHoveredButton] = useState(null);
   const [active, setActive] = useState('start');
+
   return (
-    <div className="w-[90%]  bg-[#f3f4f6]  flex flex-col items-center justify-center pb-40 rounded-b-[40px] mb-10 ">
-      <div className='w-full h-[85px] flex flex-row justify-between items-center'>
-        <div className='w-1/5 h-full bg-white rounded-br-[40px] '></div>
-        <div className='w-3/5 h-full bg-[white] flex flex-col items-center justify-start'>
-          <div className='w-full h-full bg-[#f3f4f6] rounded-t-[40px] '>
-          </div>
+    <AuroraBackground>
+      <div className="relative z-10 flex flex-col items-center justify-center px-6 py-24 w-full mx-auto">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-center mx-auto leading-tight tracking-wider text-gray-900 dark:text-white">
+          <span className="block mb-4">Transform Your Learning</span>
+          <span className="block mb-4">into Earning</span>
+        </h1>
+        
+        <span className="block text-center text-lg md:text-xl font-semibold leading-tight tracking-widest mt-8 mb-20 text-gray-800 dark:text-gray-200">
+          Master In-Demand Skills, Complete Challenges, Earn Crypto
+        </span>
+
+        <div className="flex bg-white dark:bg-gray-800 p-1 rounded-full relative items-center w-full max-w-lg mx-auto overflow-hidden">
+          <div
+            className={`absolute w-1/2 rounded-full bg-lime-300 dark:bg-lime-400 z-10 h-[88%] transition-transform duration-400
+              ${active === 'book' ? 'translate-x-[98%]' : 'translate-x-0'}`}
+          />
+
+          <button
+            onMouseEnter={() => setActive('start')}
+            onMouseLeave={() => setActive('start')}
+            className="flex-1 px-8 py-4 rounded-full text-lg font-medium z-20 transition-all duration-300 text-center cursor-pointer hover:text-gray-900 dark:hover:text-white"
+          >
+            Start free trial
+          </button>
+          <button
+            onMouseEnter={() => setActive('book')}
+            onMouseLeave={() => setActive('start')}
+            className="flex-1 px-8 py-4 rounded-full text-lg font-medium z-20 transition-all duration-300 text-center cursor-pointer hover:text-gray-900 dark:hover:text-white"
+          >
+            Book a demo
+          </button>
         </div>
-        <div className='w-1/5 h-full bg-white rounded-bl-[40px] '></div>
       </div>
-      <div className='w-full h-24 bg-white'>
-        <div className='w-full h-full bg-[#f3f4f6] rounded-t-[40px]'>
-        </div>
-      </div>
-      <h1 className="text-4xl  md:text-6xl lg:text-7xl font-bold text-center max-w-7xl mx-auto leading-tight tracking-wider text-gray-900">
-        <span className="block mb-2">Transform Your Learning</span>
-        <span className="block mb-2">into Earning</span>
-      </h1>
-      <span className="block text-s font-semibold leading-tight tracking-widest">Master In-Demand Skills, Complete Challenges, Earn Crypto</span>
-
-
-      <div className="flex mt-12 bg-white p-1 rounded-full relative items-center w-full max-w-md overflow-hidden">
-        <div
-          className={`absolute w-1/2 rounded-full bg-lime-300 z-10 h-[88%]  transition-transform duration-400 transform 
-          ${active === 'book' ? 'translate-x-[215px]' : 'translate-x-0'}`}
-        ></div>
-
-        {/* The two buttons take equal space using flex-1 */}
-        <button
-          onMouseEnter={() => setActive('start')}
-          onMouseLeave={() => setActive('start')}
-          className="flex-1 px-8 py-3 rounded-full text-base font-medium z-20 transition-all duration-300 text-center cursor-pointer"
-        >
-          Start free trial
-        </button>
-        <button
-          onMouseEnter={() => setActive('book')}
-          onMouseLeave={() => setActive('start')}
-          className="flex-1 px-8 py-3 rounded-full text-base font-medium z-20 transition-all duration-300 text-center cursor-pointer"
-        >
-          Book a demo
-        </button>
-      </div>
-     
-
-      <div className="fixed bottom-8 right-8 flex flex-col gap-4">
-        <button className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-          </svg>
-        </button>
-        <button className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-        </button>
-      </div>
-    </div>
+    </AuroraBackground>
   );
 };
 

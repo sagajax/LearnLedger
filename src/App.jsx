@@ -20,7 +20,11 @@ function App() {
     <RootLayout>
       <div className='flex flex-col items-center py-8 '>
       <Navbar />
+      
+      
+      <div className="mb-40">
       <HeroSection />
+      </div>
       {/* <Phone /> */}
       <Slider />
       <FeatureGrid />
