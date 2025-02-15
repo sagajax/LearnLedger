@@ -70,26 +70,8 @@ const ListItem = React.forwardRef(
 ListItem.displayName = "ListItem";
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <nav
-      className={`fixed w-full transition-all duration-500 z-50
-        ${scrolled
-          ? 'bg-white shadow-md'
-          : 'bg-transparent'
-        }`}
-      style={{ top: scrolled ? '0' : '40px' }}
-    >
+    <nav className="fixed w-full bg-white shadow-md z-50 top-0">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between gap-2 p-2">
           {/* Logo Section */}
